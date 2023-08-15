@@ -4,8 +4,8 @@
  */
 exports.seed = async function(knex) {
   // Deletes ALL existing entries
-  await knex('table_name').del()
-  await knex('table_name').insert([
+  await knex('episodes').del()
+  await knex('episodes').insert([
     { id: 1, season: 1, title: "Melon buffet", image: "https://taskmaster.info/images/episodes/taskmaster_uk_01_01_thumb.jpg" },
     { id: 2, season: 1, title: "The pie whisperer", image: "https://taskmaster.info/images/episodes/taskmaster_uk_01_02_thumb.jpg" },
     { id: 3, season: 1, title: "The poet and the egg", image: "https://taskmaster.info/images/episodes/taskmaster_uk_01_03_thumb.jpg" },

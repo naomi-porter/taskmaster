@@ -5,7 +5,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('episodes', (table) => {
     table.increments('id')
-    table.increments('season')
+    table.integer('season')
     table.string('title')
     table.text('image')
   })

@@ -5,7 +5,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('seasons', (table) => {
     table.increments('id')
-    table.increments('year')
+    table.integer('year')
     table.text('image')
   })
 };

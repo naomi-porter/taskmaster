@@ -4,8 +4,8 @@
  */
 exports.seed = async function(knex) {
   // Deletes ALL existing entries
-  await knex('table_name').del()
-  await knex('table_name').insert([
+  await knex('contestants').del()
+  await knex('contestants').insert([
     { id: 1, name: "Frank Skinner", season: 1, final_score: 93, image: "https://taskmaster.info/images/people/0056_frank_skinner.png" },
     { id: 2, name: "Josh Widdicombe", season: 1, final_score: 94, image: "https://taskmaster.info/images/people/0069_josh_widdicombe.png" },
     { id: 3, name: "Roisin Conaty", season: 1, final_score: 68, image: "https://taskmaster.info/images/people/0015_roisin_conaty.png" },
