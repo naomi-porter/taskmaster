@@ -13,3 +13,19 @@ export function seasonEpisodes(id: number) {
 export function seasonContestant(id: number) {
   return db('contestants').select().where('season', id)
 }
+
+interface addNewEpisodeToDB {
+  season: number,
+  title: string,
+  image: string
+}
+
+// add a "new episode"
+export function addNewEpisode(episodeToAdd: addNewEpisodeToDB) {
+  return db('episodes')
+    .insert(episodeToAdd)
+    .then((ids) => {
+      const [id] = ids;
+      return db('episodes').where({ id }).first();
+    })
+}

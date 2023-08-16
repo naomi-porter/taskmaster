@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllSeasons, seasonEpisodes, seasonContestant } from "../db/exportDBInfo";
+import { getAllSeasons, seasonEpisodes, seasonContestant, addNewEpisode } from "../db/exportDBInfo";
 
 const router = Router()
 
@@ -30,6 +30,17 @@ router.get('/seasons/:id', (request, response) => {
     .catch((error) => {
       response.status(500).json({ msg: error.message })
     })
+})
+
+// add a new episode
+router.post('/episodes', (request, response) => {
+  addNewEpisode(request.body)
+    .then((addedEpisode) => {
+      response.json(addedEpisode)     
+    })
+    .catch((error) => {
+      response.status(500).json({ msg: error.message })
+    })  
 })
 
 export default router
