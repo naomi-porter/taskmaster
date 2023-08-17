@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllSeasons, seasonEpisodes, seasonContestant, addNewEpisode, removeEpisode } from "../db/exportDBInfo";
+import { getAllSeasons, seasonEpisodes, seasonContestant, addNewEpisode, removeEpisode, updateEpisode } from "../db/exportDBInfo";
 
 const router = Router()
 
@@ -49,9 +49,25 @@ router.delete('/episodes/:id', (request, response) => {
   const episodeId = Number(request.params.id)
 
   removeEpisode(episodeId)
-  .then(() => {
-    response.json({ msg: `Episode ${episodeId} deleted successfully` })     
-  })
+    .then(() => {
+      response.json({ msg: `Episode ${episodeId} deleted successfully` })     
+    })
+    .catch((error) => {
+      response.status(500).json({ msg: error.message })
+    })  
+})
+
+// update episode details
+router.patch('/episodes/:id', (request, response) => {
+
+  const episodeId = Number(request.params.id)
+
+  const updateDetails = request.body
+
+  updateEpisode(episodeId, updateDetails)
+    .then((returnUpdatedInfo) => {
+      response.json(returnUpdatedInfo)
+    })
     .catch((error) => {
       response.status(500).json({ msg: error.message })
     })  

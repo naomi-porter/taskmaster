@@ -35,4 +35,17 @@ export function removeEpisode(id: number){
   return db('episodes').where('id', id).first().delete()
 }
 
+interface imageObject {
+  image: string
+}
+
+// update episode details
+export function updateEpisode(id: number, imageObject: imageObject){
+  return db('episodes')
+    .where('id', id)
+    .update(imageObject)
+    .then(() => {
+      return db('episodes').where({ id }).first();
+    })
+}
 
