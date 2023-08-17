@@ -1,5 +1,12 @@
-import { Router } from "express";
-import { getAllSeasons, seasonEpisodes, seasonContestant, addNewEpisode, removeEpisode, updateEpisode } from "../db/exportDBInfo";
+import { Router } from 'express'
+import {
+  getAllSeasons,
+  seasonEpisodes,
+  seasonContestant,
+  addNewEpisode,
+  removeEpisode,
+  updateEpisode,
+} from '../db/exportDBInfo'
 
 const router = Router()
 
@@ -17,13 +24,11 @@ router.get('/seasons', (request, response) => {
 // for a specific season
 // list all episodes and contestants
 router.get('/seasons/:id', (request, response) => {
-
   const idToNumber = Number(request.params.id)
 
   seasonEpisodes(idToNumber)
     .then((episodesList) => {
-     return seasonContestant(idToNumber)
-      .then((contestantsList) => {
+      return seasonContestant(idToNumber).then((contestantsList) => {
         response.json({ episodes: episodesList, contestants: contestantsList })
       })
     })
@@ -36,32 +41,29 @@ router.get('/seasons/:id', (request, response) => {
 router.post('/episodes', (request, response) => {
   addNewEpisode(request.body)
     .then((addedEpisode) => {
-      response.json(addedEpisode)     
+      response.json(addedEpisode)
     })
     .catch((error) => {
       response.status(500).json({ msg: error.message })
-    })  
+    })
 })
 
 // delete an episode
 router.delete('/episodes/:id', (request, response) => {
-  
   const episodeId = Number(request.params.id)
 
   removeEpisode(episodeId)
     .then(() => {
-      response.json({ msg: `Episode ${episodeId} deleted successfully` })     
+      response.json({ msg: `Episode ${episodeId} deleted successfully` })
     })
     .catch((error) => {
       response.status(500).json({ msg: error.message })
-    })  
+    })
 })
 
 // update episode details
 router.patch('/episodes/:id', (request, response) => {
-
   const episodeId = Number(request.params.id)
-
   const updateDetails = request.body
 
   updateEpisode(episodeId, updateDetails)
@@ -70,7 +72,7 @@ router.patch('/episodes/:id', (request, response) => {
     })
     .catch((error) => {
       response.status(500).json({ msg: error.message })
-    })  
+    })
 })
 
 export default router
