@@ -29,3 +29,10 @@ export function addNewEpisode(episodeToAdd: addNewEpisodeToDB) {
       return db('episodes').where({ id }).first();
     })
 }
+
+// remove an episode
+export function removeEpisode(id: number){
+  return db('episodes').where('id', id).first().delete()
+}
+
+
