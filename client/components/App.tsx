@@ -1,9 +1,22 @@
-// import { fetchSeasons } from "../apis/apis"
-// import { useState } from "react"
-
-
+import { fetchSeasons } from '../apis/apis'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { seasonsObjectsInterface } from '../../models/seasons'
 
 function App() {
+  const [seasonsList, setSeasonsList] = useState<seasonsObjectsInterface[]>([])
+
+  // on page load, grab seasons list
+  useEffect(() => {
+    fetchSeasons()
+      .then((returnedSeasons) => {
+        setSeasonsList(returnedSeasons)
+      })
+      .catch(() => {
+        alert('sorry no seasons data')
+      })
+  }, [])
+
   return (
     <>
       <header className="header">
@@ -13,11 +26,11 @@ function App() {
       <section className="main">
         <h2 className="subtitle">Seasons</h2>
         <div className="columns">
-          <div className="column">First column</div>
-          <div className="column">Second column</div>
-          <div className="column">Third column</div>
-          <div className="column">Fourth column</div>
-          <div className="column">5th column</div>
+          {seasonsList.map((season) => (
+            <div className="column" key={season.id}>
+              <Link to={`/seasons/${season.id}`}>Season {season.id}</Link>
+            </div>
+          ))}
         </div>
       </section>
     </>
