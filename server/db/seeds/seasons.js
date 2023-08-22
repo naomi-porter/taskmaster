@@ -6,8 +6,8 @@ exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('seasons').del()
   await knex('seasons').insert([
-    { id: 1, year: 2015, image: "https://taskmaster.info/images/seasons/taskmaster_uk_series_01_thumb.jpg" },
-    { id: 2, year: 2016, image: "https://taskmaster.info/images/seasons/taskmaster_uk_series_02_thumb.jpg" },
-    { id: 3, year: 2016, image: "https://taskmaster.info/images/seasons/taskmaster_uk_series_03_thumb.jpg" },
+    { id: 1, year: 2015, image: "https://taskmaster.info/images/seasons/taskmaster_uk_01_framed.png" },
+    { id: 2, year: 2016, image: "https://taskmaster.info/images/seasons/taskmaster_uk_02_framed.png" },
+    { id: 3, year: 2016, image: "https://taskmaster.info/images/seasons/taskmaster_uk_03_framed.png" },
   ]);
 };
